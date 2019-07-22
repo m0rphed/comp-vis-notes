@@ -7,19 +7,19 @@ class ExtractingFramesType(Enum):
     BY_NUM = 1
 
 
-def extract_frames_by_list_of_frame_numbers(cap, list_of_frame_numbers):
+def extract_frames_by_list_of_frame_numbers(captured, list_of_frame_numbers):
     list_of_frame_numbers.sort()
-    total = cap.get(7)
+    total = captured.get(7)
     list_of_frames = []
     counter = 0
     while True:
-        if ~cap.grap():
-            print("Wrong try of graping video while extracting frames\n")
+        if ~captured.grap():
+            print("Wrong try of graping video while extracting frames")
             exit(-1)
 
-        is_retrieved_right, frame = cap.retrieve
+        is_retrieved_right, frame = captured.retrieve
         if ~is_retrieved_right:
-            print("Wrong try of retrieving frame while extracting one\n")
+            print("Wrong try of retrieving frame while extracting one")
             exit(-1)
 
         if counter == list_of_frame_numbers[list_of_frames.count()]:
@@ -34,27 +34,27 @@ def extract_frames_by_list_of_frame_numbers(cap, list_of_frame_numbers):
 def extract_frames_by_number(cap, num):
     total = cap.get(7)
     step = total / num
-    list_of_frame_numbers = []
+    frame_numbers = []
     counter = 0
     while counter < total:
-        list_of_frame_numbers += counter
+        frame_numbers += counter
         counter += step
 
-    return extract_frames_by_list_of_frame_numbers(cap, list_of_frame_numbers)
+    return extract_frames_by_list_of_frame_numbers(cap, frame_numbers)
 
 
-def extract_frames_by_time(cap, list_of_time_codes):
-    list_of_frame_numbers = []
+def extract_frames_by_time(cap, time_codes):
+    frame_numbers = []
     fps = cap.get(5)
     total = cap.get(7)
 
-    for i in list_of_time_codes:
-        frame_number = i * fps
+    for _code in time_codes:
+        frame_number = _code * fps
         if frame_number < 0 | frame_number >= total:
             continue
-        list_of_frame_numbers += frame_number
+        frame_numbers += frame_number
 
-    return extract_frames_by_list_of_frame_numbers(cap, list_of_frame_numbers)
+    return extract_frames_by_list_of_frame_numbers(cap, frame_numbers)
 
 
 def extract_frames_from_video(video_name):

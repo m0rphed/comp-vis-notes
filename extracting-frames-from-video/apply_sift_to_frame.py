@@ -1,8 +1,11 @@
 import cv2
 
 
-def make_sift(list_of_frames):
-    list_of_sifted_frames = []
-    for i in list_of_frames:
-        list_of_sifted_frames += cv2.SIFT(i)
-    return list_of_sifted_frames
+def apply_sift(frames):
+    # Create SIFT object
+    sift = cv2.xfeatures2d.SIFT_create()
+
+    # result an array of tuples -> [ (frame_keypoints_sift, frame_descriptors_sift), ...]
+    result = [sift.detectAndCompute(frame, None) for frame in frames]
+
+    return result

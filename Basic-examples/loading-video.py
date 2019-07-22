@@ -1,7 +1,6 @@
 import cv2
-import numpy as np
 
-capture = cv2.VideoCapture(0);
+capture = cv2.VideoCapture(0)
 fourcc = cv2.VideoWriter_fourcc(*'XVID')
 out = cv2.VideoWriter('camera_output.avi', fourcc, 20.0, (640, 480))
 

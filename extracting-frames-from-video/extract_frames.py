@@ -15,16 +15,25 @@ class ExtractingFramesType(Enum):
 
 def extract_frames_from_video():
     print('Sample: winter-saint-petersburg.mp4')
-    video_name = input("Enter name of video: ")
-
-    cap = cv2.VideoCapture(video_name)
-    if not cap.isOpened():
-        print("Video hasn't opened\n")
-        exit(-1)
+    while True:
+        video_name = input("Enter name of video: ")
+        cap = cv2.VideoCapture(video_name)
+        if not cap.isOpened():
+            print("Wrong filename or bad input file\n")
+            continue
+        print('Video successfully opened')
+        break
 
     list_of_frames = []
-    print('Be aware of types: 0 - by timecodes; 1 - by number, 2 - by ranges, 3 - by ranges and numbers')
-    type_of_extracting = ExtractingFramesType(int(input("Enter type of extracting: ")))
+    print('\nBe aware of types: 0 - by timecodes, 1 - by number, 2 - by ranges, 3 - by ranges and numbers')
+    while True:
+        type_of_extracting = int(input("Enter type of extracting: "))
+        if type_of_extracting < 0 or type_of_extracting > 3:
+            print('Wrong extracting type\n')
+            continue
+        type_of_extracting = ExtractingFramesType(type_of_extracting)
+        break
+
     if type_of_extracting == ExtractingFramesType.BY_TIME:
         list_of_frames = extract_frames_by_timecodes(cap)
 

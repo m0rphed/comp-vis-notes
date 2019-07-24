@@ -2,11 +2,14 @@ from extract_frames_by_list_of_frame_numbers import extract_frames_by_list_of_fr
 
 
 def extract_frames_by_number(cap):
-    number_of_frames = int(input("Enter number of extracting frames: "))
-    if number_of_frames < 1:
-        exit(0)
-
     total = int(cap.get(7))
+    while True:
+        number_of_frames = int(input("Enter number of extracting frames: "))
+        if number_of_frames < 1 or number_of_frames >= total:
+            print('Wrong number of frames\n')
+            continue
+        break
+
     step = int(total / (number_of_frames + 1))
     if step == 0:
         step = 1

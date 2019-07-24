@@ -22,7 +22,9 @@ def extract_frames_by_timecodes(cap):
     if number_of_entering_values < 1:
         exit(0)
 
-    print(f'\nBe aware: timecodes in range 0-{int(total / fps)} seconds / 0:00-{int(total / 25 / 60)}:{int(total / 25 % 60)} minutes')
+    print(f'\nBe aware: timecodes in range 0-{0} seconds / 0:00-{1}:{2} minutes'.format(int(total / fps),
+                                                                                        int(total / 25 / 60),
+                                                                                        int(total / 25 % 60)))
     for i in range(number_of_entering_values):
         while True:
             frame_number = enter_one_time_code('Enter timecode: ') * fps

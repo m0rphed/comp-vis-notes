@@ -23,6 +23,7 @@ for m, n in matches:
         good.append([m])
 
 # cv2.drawMatchesKnn expects list of lists as matches.
-img3 = cv2.drawMatchesKnn(img1, kp1, img2, kp2, good, flags=2)
+img3 = cv2.drawMatchesKnn(img1, kp1, img2, kp2, matches,None)
+
 
 plt.imshow(img3), plt.show()
